@@ -107,13 +107,17 @@ DeviceChooserLayer_EnumeratePhysicalDevices(VkInstance        instance,
     {
         *pPhysicalDeviceCount = 1;
     }
+    else if (*pPhysicalDeviceCount < 1)
+    {
+        result = VK_INCOMPLETE;
+    }
     else if (*pPhysicalDeviceCount > 0)
     {
         *pPhysicalDevices     = device;
         *pPhysicalDeviceCount = 1;
     }
 
-    return VK_SUCCESS;
+    return result;
 }
 
 VK_LAYER_EXPORT VkResult VKAPI_CALL
